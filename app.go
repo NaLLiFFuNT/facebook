@@ -57,21 +57,21 @@ func (app *App) ParseSignedRequest(signedRequest string) (res Result, err error)
 	sig, e1 := base64.RawURLEncoding.DecodeString(strs[0])
 
 	if e1 != nil {
-		err = fmt.Errorf("facebook: fail to decode signed request sig with error %v", e1)
+		err = fmt.Errorf("facebook: fail to decode signed request sig with error %w", e1)
 		return
 	}
 
 	payload, e2 := base64.RawURLEncoding.DecodeString(strs[1])
 
 	if e2 != nil {
-		err = fmt.Errorf("facebook: fail to decode signed request payload with error is %v", e2)
+		err = fmt.Errorf("facebook: fail to decode signed request payload with error is %w", e2)
 		return
 	}
 
 	err = json.Unmarshal(payload, &res)
 
 	if err != nil {
-		err = fmt.Errorf("facebook: signed request payload is not a valid json string with error %v", err)
+		err = fmt.Errorf("facebook: signed request payload is not a valid json string with error %w", err)
 		return
 	}
 
@@ -132,7 +132,7 @@ func (app *App) ParseCodeInfo(code, machineID string) (token string, expires int
 	})
 
 	if err != nil {
-		err = fmt.Errorf("facebook: fail to parse facebook response with error %v", err)
+		err = fmt.Errorf("facebook: fail to parse facebook response with error %w", err)
 		return
 	}
 
@@ -180,7 +180,7 @@ func (app *App) ExchangeToken(accessToken string) (token string, expires int, er
 	})
 
 	if err != nil {
-		err = fmt.Errorf("fail to parse facebook response with error %v", err)
+		err = fmt.Errorf("fail to parse facebook response with error %w", err)
 		return
 	}
 
@@ -220,7 +220,7 @@ func (app *App) GetCode(accessToken string) (code string, err error) {
 	})
 
 	if err != nil {
-		err = fmt.Errorf("facebook: fail to get code from facebook with error %v", err)
+		err = fmt.Errorf("facebook: fail to get code from facebook with error %w", err)
 		return
 	}
 

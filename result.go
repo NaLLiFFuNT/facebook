@@ -195,7 +195,7 @@ func makeResult(jsonBytes []byte, res interface{}) error {
 			}
 		}
 
-		return fmt.Errorf("facebook: cannot format facebook response. %v", err)
+		return fmt.Errorf("facebook: cannot format facebook response. %w", err)
 	}
 
 	return nil
@@ -603,7 +603,7 @@ func decodeField(val reflect.Value, field reflect.Value, fullName string) error 
 		data, err := json.Marshal(val.Interface())
 
 		if err != nil {
-			return fmt.Errorf("facebook: fail to marshal value for field '%v' with error %v", fullName, err)
+			return fmt.Errorf("facebook: fail to marshal value for field '%v' with error %w", fullName, err)
 		}
 
 		return unmarshaler.UnmarshalJSON(data)

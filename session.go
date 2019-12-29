@@ -466,7 +466,7 @@ func (session *Session) sendPostRequest(uri string, params Params, res interface
 	mime, err := params.Encode(buf)
 
 	if err != nil {
-		return nil, fmt.Errorf("facebook: cannot encode POST params; %v", err)
+		return nil, fmt.Errorf("facebook: cannot encode POST params; %w", err)
 	}
 
 	request, err := http.NewRequest("POST", uri, buf)
@@ -492,7 +492,7 @@ func (session *Session) sendOauthRequest(uri string, params Params) (Result, err
 	mime, err := params.Encode(buf)
 
 	if err != nil {
-		return nil, fmt.Errorf("facebook: cannot encode POST params; %v", err)
+		return nil, fmt.Errorf("facebook: cannot encode POST params; %w", err)
 	}
 
 	request, err := http.NewRequest("POST", urlStr, buf)
@@ -548,7 +548,7 @@ func (session *Session) sendRequest(request *http.Request) (response *http.Respo
 	}
 
 	if err != nil {
-		err = fmt.Errorf("facebook: cannot reach facebook server; %v", err)
+		err = fmt.Errorf("facebook: cannot reach facebook server; %w", err)
 		return
 	}
 
@@ -557,7 +557,7 @@ func (session *Session) sendRequest(request *http.Request) (response *http.Respo
 	response.Body.Close()
 
 	if err != nil {
-		err = fmt.Errorf("facebook: cannot read facebook response; %v", err)
+		err = fmt.Errorf("facebook: cannot read facebook response; %w", err)
 	}
 
 	data = buf.Bytes()
